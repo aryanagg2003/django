@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ConeWare</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background: linear-gradient(22.5deg, orange, gray);
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ConeWare</h1>
+        <div class="dropdown">
+            <button class="button">Tabs</button>
+            <div class="dropdown-content">
+                <a href="#">URL Link 1</a>
+                <a href="#">URL Link 2</a>
+                <a href="#">URL Link 3</a>
+                <a href="#">URL Link 4</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="button">Downloads</button>
+            <div class="dropdown-content">
+                <a href="#">Download 1</a>
+                <a href="#">Download 2</a>
+                <a href="#">Download 3</a>
+                <a href="#">Download 4</a>
+                <a href="#">Download 5</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="button">Discord</button>
+            <div class="dropdown-content">
+                <a href="#">ConeWare Community Discord</a>
+                <a href="#">Steam Games Creation</a>
+            </div>
+        </div>
+        <div class="box">
+            <h2>ConeWare</h2>
+        </div>
+    </div>
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

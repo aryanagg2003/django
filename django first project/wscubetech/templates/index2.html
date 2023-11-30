@@ -1,53 +1,6 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-  <meta charset="utf-8">
-  <title>TinDog</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="https://kit.fontawesome.com/43124feaf5.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
-</head>
-
-<body>
-
-  <section class="colored-section" id="title">
-    <div class="container-fluid">
-
-
-      <!-- Nav Bar -->
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="">tindog</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-          <ul class="navbar-nav ms-auto">
-            <li class="navbar-item">
-              <a class="nav-link" href="#footer">Contact</a>
-            </li>
-            <li class="navbar-item">
-              <a class="nav-link" href="#pricing">Pricing</a>
-            </li>
-            <li class="navbar-item">
-              <a class="nav-link" href="#cta">Download</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-
+{% block content %}
 
       <!-- Title -->
 
@@ -58,7 +11,7 @@
           <button class="btn btn-outline-light btn-lg download-button" type="button"><i class="fa-brands fa-google-play"></i> Download</button>
         </div>
         <div class="col-lg-6">
-          <img class="title-image" src="images/iphone6.png" alt="iphone-mockup">
+          <img class="title-image" src="static/iphone6.png" alt="iphone-mockup">
         </div>
       </div>
 
@@ -103,12 +56,12 @@
       <div class="carousel-inner">
         <div class="carousel-item active container-fluid">
           <h2 class="testimonial-text">I no longer have to sniff other dogs for love. I've found the hottest Corgi on TinDog. Woof.</h2>
-          <img class="testimonial-image" src="images/dog-img.jpg" alt="dog-profile">
+          <img class="testimonial-image" src="static/dog-img.jpg" alt="dog-profile">
           <em>Pebbles, New York</em>
         </div>
         <div class="carousel-item container-fluid">
           <h2 class="testimonial-text">My dog used to be so lonely, but with TinDog's help, they've found the love of their life. I think.</h2>
-          <img class="testimonial-image" src="images/lady-img.jpg" alt="lady-profile">
+          <img class="testimonial-image" src="static/lady-img.jpg" alt="lady-profile">
           <em>Beverly, Illinois</em>
         </div>
 
@@ -132,10 +85,10 @@
   <!-- Press -->
 
   <section class="colored-section" id="press">
-    <img class="press-logo" src="images/techcrunch.png" alt="tc-logo">
-    <img class="press-logo" src="images/tnw.png" alt="tnw-logo">
-    <img class="press-logo" src="images/bizinsider.png" alt="biz-insider-logo">
-    <img class="press-logo" src="images/mashable.png" alt="mashable-logo">
+    <img class="press-logo" src="static/techcrunch.png" alt="tc-logo">
+    <img class="press-logo" src="static/tnw.png" alt="tnw-logo">
+    <img class="press-logo" src="static/bizinsider.png" alt="biz-insider-logo">
+    <img class="press-logo" src="static/mashable.png" alt="mashable-logo">
 
   </section>
 
@@ -210,17 +163,5 @@
 
   <!-- Footer -->
 
-  <footer class="white-section" id="footer">
-    <div class="container-fluid">
-      <i class="social-icon fa-brands fa-facebook"></i>
-      <i class="social-icon fa-brands fa-twitter"></i>
-      <i class="social-icon fa-brands fa-instagram"></i>
-      <i class="social-icon fa-solid fa-envelope"></i>
-      <p>© Copyright TinDog</p>
-    </div>
-  </footer>
-
-
-</body>
-
-</html>
+  
+  {% endblock  %}

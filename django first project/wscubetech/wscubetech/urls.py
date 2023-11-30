@@ -22,6 +22,12 @@ urlpatterns = [
     path('admin-panel/', admin.site.urls),
     path('', views.homePage),
     path('about-us/',views.aboutUS),
+    path('contact-us/',views.contactUs,name="contact"),
+    path('price-us/',views.priceUs,name="price"),
+    path('download/',views.downloadUs,name="download"),
     path('course/',views.course),
+    path('thankyou/',views.thankyou),
+    path('submitfrom/',views.submitForm,name="submitform"),
     path('course/<int:courseid>',views.courseDetails),
+    path('userform/',views.userForm),
 ]

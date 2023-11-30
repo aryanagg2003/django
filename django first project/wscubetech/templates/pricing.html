@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pinkish-red: #C35A74;
+            --medium-blue: #307BAA;
+            --greenish-blue: #53BAB5;
+            --bright-orange: #FF7445;
+            --white-smoke: #F5F5F4;
+            --white: #FFF;
+            --dark-gray: #7D7C7C;
+            --black: #000;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--white-smoke);
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 100px auto;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            height: 586px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            margin: 0 10px;
+            background: var(--white);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 20%);
+        }
+
+        .title {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 1.2em;
+            font-weight: lighter;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            color: var(--white-smoke);
+        }
+
+        .basic .title {
+            background: var(--pinkish-red);
+        }
+
+        .standard .title {
+            background: var(--medium-blue);
+        }
+
+        .business .title {
+            background: var(--greenish-blue);
+        }
+
+        .view {
+            width: 100%;
+            padding: 30px 0 20px;
+            background: var(--white-smoke);
+        }
+
+        .icon {
+            display: flex;
+            justify-content: center;
+        }
+
+        .icon img {
+            width: 100px;
+        }
+
+        .cost {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .amount {
+            font-size: 2.8em;
+            font-weight: bolder;
+            text-align: center;
+        }
+
+        .detail {
+            margin: 5px 0;
+            font-size: 0.7em;
+            font-weight: bold;
+            line-height: 15px;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+
+        .description {
+            margin: 30px auto;
+            font-size: 0.8em;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-top: 10px;
+            position: relative;
+        }
+
+        li::before {
+            content: "";
+            background-image: url("https://i.postimg.cc/ht7g996V/check.png");
+            background-position: center;
+            background-size: cover;
+            opacity: 0.5;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 10px;
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .button {
+            margin: 0 auto 30px;
+        }
+
+        button {
+            height: 40px;
+            width: 250px;
+            font-size: 0.7em;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: var(--dark-gray);
+            border: 2px solid var(--dark-gray);
+            border-radius: 50px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: var(--white-smoke);
+            transition: 0.5s;
+            border: none;
+            background: var(--bright-orange);
+        }
+
+        /* Responsiveness:Start */
+        @media screen and (max-width: 970px) {
+            .content {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                margin: 50px auto;
+            }
+
+            .standard,
+            .business {
+                margin-top: 25px;
+            }
+        }
+        /* Responsiveness:End */
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="content">
+
+            <div class="basic box">
+                <h2 class="title">Basic</h2>
+                <div class="view">
+                    <div class="icon">
+                        <img src="https://i.postimg.cc/2jcfMcf4/hot-air-balloon.png" alt="hot-air-balloon">
+                    </div>
+                    <div class="cost">
+                        <p class="amount">$09</p>
+                        <p class="detail">per student per month</p>
+                    </div>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Lorem, ipsum dolor.</li>
+                        <li>Harum, beatae laudantium.</li>
+                        <li>Odit, fugit saepe.</li>
+                        <li>Harum, veniam suscipit!</li>
+                        <li>A, aut veritatis!</li>
+                        <li>Aliquid, quasi repellat!</li>
+                    </ul>
+                </div>
+                <div class="button">
+                    <button type="submit">START FREE 7 DAYS TRIAL</button>
+                </div>
+            </div>
+
+            <!-- Add the other boxes with similar structure here -->
+
+        </div>
+    </section>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
