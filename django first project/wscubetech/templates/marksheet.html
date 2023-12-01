@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+    {% block content %}
+
+    <section class="feature-area section-gap" id="secvice">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content pb-60 col-lg-8">
+                    <div class="title text-centre">
+                        <h1 class="mb-10">Marksheet</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <form method="post">
+                    {% csrf_token %}
+                    <label>Subject 1</label>
+                    <input type="text" name="subject1" class="form-control"/>
+                    
+                    <label>Subject 2</label>
+                    <input type="text" name="subject2" class="form-control"/>
+
+                    <label>Subject 3</label>
+                    <input type="text" name="subject3" class="form-control"/>
+
+                    <label>Subject 4</label>
+                    <input type="text" name="subject4" class="form-control"/>
+
+                    <label>Subject 5</label>
+                    <input type="text" name="subject5" class="form-control"/>
+
+                    <button type="submit">Marksheet</button><br>
+                    <label>Total</label>
+                    <input type="text" value="{{total}}"  class="form-control"/><br/>
+                    <label>Percentage</label>
+                    <input type="text" value="{{per}}"  class="form-control"/><br/>
+                    <label>Division</label>
+                    <input type="text" value="{{div}}"  class="form-control"/><br/>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}

@@ -18,7 +18,8 @@
                     <div class="col-12">
                         <form method="post" action="{% url 'submitform' %}">
                             {% csrf_token %}
-                            <div>
+                            {{form}}
+                            {% comment %} <div>
                                 <label for="">Value1</label>
                                 <input type="text" name="num1" value="{{n1}}" class="form-control"/>
                             </div>
@@ -26,7 +27,7 @@
                             <div>
                                 <label for="">Value2</label>
                                 <input type="text" name="num2" value="{{n2}}" class="form-control"/>
-                            </div>
+                            </div> {% endcomment %}
 
                             <div class="pt-4">
                                 <button type="submit">Save</button>

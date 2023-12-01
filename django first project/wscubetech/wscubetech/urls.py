@@ -28,6 +28,9 @@ urlpatterns = [
     path('course/',views.course),
     path('thankyou/',views.thankyou),
     path('submitfrom/',views.submitForm,name="submitform"),
+    path('calculator/',views.calculator),
+    path('saveevenodd/',views.saveevenodd,name="saveevenodd"),
+    path('marksheet/',views.marksheet),
     path('course/<int:courseid>',views.courseDetails),
     path('userform/',views.userForm),
 ]
