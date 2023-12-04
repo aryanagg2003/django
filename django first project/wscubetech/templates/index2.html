@@ -2,6 +2,21 @@
 
 {% block content %}
 
+<marquee onmouseover="stop()" onmouseout="start()">
+  {% for news in newsData %}
+  <a href="/newsdetails/{{news.id}}">{{news.news_title}}</a> &nbsp &nbsp
+  {% endfor %}
+</marquee>
+
+
+{% comment %} As it is static
+<marquee>
+  Welcome to Dogs World
+</marquee> {% endcomment %}
+<br>
+<br>
+<br>
+
       <!-- Title -->
 
       <div class="row">
@@ -26,7 +41,7 @@
 
 
       <div class="row">
-        {% for n in sericesData%}
+        {% comment %} {% for n in sericesData%} {% endcomment %}
         <div class="feature-box col-lg-4">
           <i class="icon fa-sharp fa-solid fa-circle-check fa-4x"></i>
           <h3 class="feature-title">Easy to use.</h3>
@@ -101,31 +116,31 @@
     <h2 class="section-heading">A Plan for Every Dog's Needs</h2>
     <p>Simple and affordable price plans for your and your dog.</p>
     <div class="row">
+      {% for n in servicesData%}
       <div class="pricing-column col-lg-4 col-md-6">
         <div class="card">
-          <div class="card-header">
-            <h3>Chihuahua</h3>
+          <div class="{{n.service_icon}}">
+            <h3>{{n.service_title}}</h3>
           </div>
           <div class="card-body">
             <h2 class="pricing-text">Free</h2>
-            <p>5 Matches Per Day</p>
-            <p>10 Messages Per Day</p>
-            <p>Unlimited App Usage</p>
+            <p>{{n.service_des | safe }}</p>
             <button class="btn btn-lg w-100 btn-dark" type="button">Sign Up</button>
           </div>
         </div>
       </div>
+      {% endfor %}
       <!-- w-100 is used to get full length button -->
-      <div class="pricing-column col-lg-4 col-md-6">
+      {% comment %} <div class="pricing-column col-lg-4 col-md-6">
         <div class="card">
           <div class="card-header">
             <h3>Labrador</h3>
           </div>
           <div class="card-body">
             <h2 class="price-text">$49 / mo</h2>
-            <p>Unlimited Matches</p>
-            <p>Unlimited Messages</p>
-            <p>Unlimited App Usage</p>
+            <p>Unlimited Matches<br>
+              Unlimited Messages<br>
+              Unlimited App Usage</p>
             <button class="btn btn-lg w-100 btn-dark" type="button">Sign Up</button>
           </div>
         </div>
@@ -138,14 +153,14 @@
           </div>
           <div class="card-body">
             <h2 class="price-text">$99 / mo</h2>
-            <p>Pirority Listing</p>
-            <p>Unlimited Matches</p>
-            <p>Unlimited Messages</p>
-            <p>Unlimited App Usage</p>
+            <p>Pirority Listing<br>
+              Unlimited Matches<br>
+              Unlimited Messages<br>
+              Unlimited App Usage</p>
             <button class="btn btn-lg w-100 btn-dark" type="button">Sign Up</button>
           </div>
         </div>
-      </div>
+      </div> {% endcomment %}
     </div>
 
   </section>

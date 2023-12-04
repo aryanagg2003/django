@@ -33,4 +33,5 @@ urlpatterns = [
     path('marksheet/',views.marksheet),
     path('course/<int:courseid>',views.courseDetails),
     path('userform/',views.userForm),
+    path('newsdetails/<id>',views.newsDetails),
 ]

@@ -2,11 +2,17 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .forms import usersForm
 from service.models import service
+from news.models import News
 
 def homePage(request):
-    servicesData = service.objects.all()
+    newsData = News.objects.all()
+    servicesData = service.objects.all().order_by('-service_title')[:3]
+    # print(service)
+    # for a in servicesData:
+    #     print(a.service_icon)
     data = {
-        'servicesData':servicesData
+        'servicesData':servicesData,
+        'newsData': newsData
     }
     # data = {
     #     'title':'Home Page',
@@ -19,6 +25,13 @@ def homePage(request):
     #     ]
     # }
     return render(request,"index2.html",data)
+
+def newsDetails(request,id):
+     newsDetails = News.objects.get(id=id)
+     data = {
+         'newsDetails':newsDetails
+     }
+     return render(request,"newsdetails.html",data)
 
 def submitForm(request):
     finalans = 0
