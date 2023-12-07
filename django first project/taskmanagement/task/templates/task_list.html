@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+   
+{% block content %}
+        
+        <h2>Task List</h2>
+        <br>
+        <ul class="list-group">
+            {% for task in tasks %}
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>{{ task.title}}</span>
+                    <span>{{ task.created_at }}</span>
+                    <a href="{% url 'task-detail' pk=task.pk %}" class="btn btn-info btn-sm">Details</a>
+                    <a href="{% url 'task-update' pk=task.pk %}" class="btn btn-info btn-sm">Update</a>
+                    <a href="{% url 'task-delete' pk=task.pk %}" class="btn btn-info btn-sm">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+            
+        </ul>
+    
+    <br>
+
+    {% endblock %}
+
+
