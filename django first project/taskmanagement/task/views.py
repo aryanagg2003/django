@@ -13,8 +13,9 @@ from datetime import timedelta
 def task_list(request):
     search_query = request.GET.get('search', '')
     filter_date = request.GET.get('filter_date', '')
-
-    tasks = Task.objects.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
+    # tasks = Task.objects.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query)).first()
+    
+    tasks = Task.objects.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query),user=request.user)
 
     if filter_date == 'today':
         tasks = tasks.filter(created_at__date=timezone.now().date())
@@ -33,7 +34,9 @@ def task_create(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            task=form.save(commit=False)
+            task.user = request.user
+            task.save()
             return redirect('task-list')  
     else:
         form = TaskForm()
@@ -60,6 +63,7 @@ def task_delete(request, pk):
         return redirect('task-list')
     return render(request,'task_delete.html',{'task':task})
 
+
 def login_page(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -70,9 +74,9 @@ def login_page(request):
         if user is None:
             messages.error(request, 'Invalid credentials')
             return render(request, 'login.html')
-
-        login(request, user)
-        return redirect('task-list')
+        else:
+            login(request, user)
+            return redirect('task-list')
 
     return render(request, 'login.html')
 
@@ -97,7 +101,7 @@ def register(request):
             last_name=last_name,
             password=password
         )
-
+        user.save()
         messages.info(request, 'Account created successfully')
         return redirect('login-page')
 
