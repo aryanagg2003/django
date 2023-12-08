@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from task import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('task-list/',views.task_list,name='task-list'),
@@ -25,4 +26,7 @@ urlpatterns = [
     path('task-detail/<int:pk>/',views.task_detail,name='task-detail'),
     path('task-update/<int:pk>/',views.task_update,name='task-update'),
     path('task-delete/<int:pk>/',views.task_delete,name='task-delete'),
+    path('login/',views.login_page,name='login-page'),
+    path('register/',views.register,name='register'),
+    path('logout',views.logout_page,name="logout")
 ]
