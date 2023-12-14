@@ -1,0 +1,18 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "taskmanagement/wsgi.py",
+        "use": "@vercel/python",
+        "config": {"maxLambdaSize": "1.5mb"}
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "taskmanagement/wsgi.py"
+      }
+    ]
+  }
+  
+  

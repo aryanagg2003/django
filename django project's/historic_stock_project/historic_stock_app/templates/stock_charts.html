@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Stock Charts{% endblock %}
+
+{% block content %}
+  <h1 class="display-4 text-center border-bottom border-gray pb-2 mb-0">Stock Charts</h1>
+
+  <div class="container">
+    {% for symbol, image_base64 in company_images.items %}
+      <div class="stock-chart">
+        <h2>{{ symbol }} Stock Prices</h2>
+        <img src="data:image/png;base64,{{ image_base64 }}" alt="{{ symbol }} Stock Chart">
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

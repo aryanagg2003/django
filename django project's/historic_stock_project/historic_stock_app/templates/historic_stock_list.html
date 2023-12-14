@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h1 class="display-4 text-center border-bottom border-gray pb-2 mb-0">Historical Stock Price</h1>
+        <button type="button" onclick="window.location.href='{% url 'stock_charts' %}'">Go to Charts</button>
+        <table class="table table-responsive">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Company</th>
+                <th scope="col">Date</th>
+                <th scope="col">Open</th>
+                <th scope="col">High</th>
+                <th scope="col">Low</th>
+                <th scope="col">Close</th>
+                <th scope="col">Adj. Close</th>
+                <th scope="col">Volume</th>
+                <th scope="col">Unadjusted Volume</th>
+                <th scope="col">Change</th>
+                <th scope="col">Change Percentage</th>
+                <th scope="col">VWAP</th>
+                <th scope="col">Label</th>
+                <th scope="col">Change OverTime</th>
+              </tr>
+            </thead>
+            <tbody>
+                <p>{{page_obj}}</p>
+                {% for historical_stock in page_obj %}
+                    <tr>
+                        <td>{{ historical_stock.companySymbol }}</td>
+                        <td>{{ historical_stock.historicalDate }}</td>
+                        <td>{{ historical_stock.historicalOpen }}</td>
+                        <td>{{ historical_stock.historicalHigh }}</td>
+                        <td>{{ historical_stock.historicalLow }}</td>
+                        <td>{{ historical_stock.historicalClose }}</td>
+                        <td>{{ historical_stock.historicalAdjClose }}</td>
+                        <td>{{ historical_stock.historicalVolume }}</td>
+                        <td>{{ historical_stock.historicalUnAdjustedVolume }}</td>
+                        <td>{{ historical_stock.historicalChange }}</td>
+                        <td>{{ historical_stock.historicalChangePercent }}</td>
+                        <td>{{ historical_stock.historicalVwap }}</td>
+                        <td>{{ historical_stock.historicalLabel }}</td>
+                        <td>{{ historical_stock.historicalChangeOverTime }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">&laquo;</a>
+                </li>
+            {% endif %} 
+            {% for page_num in page_obj.paginator.page_range %} 
+                {% if page_obj.number == page_num %}
+                    <li class="page-item"><a class="page-link active">{{ page_num }}</a></li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% endif %} 
+            {% endfor %} 
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+        
+    </div>
+{% endblock %}
