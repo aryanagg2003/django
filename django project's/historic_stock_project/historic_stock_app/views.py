@@ -11,11 +11,10 @@ from .forms import StockSearchForm
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
-
+from django.db.models import Q
 from .models import HistoricalStockPrice
 
 class HistoricalStockListView(ListView):
-
     template_name = "historic_stock_list.html"
     form_class = StockSearchForm
 
@@ -30,7 +29,6 @@ class HistoricalStockListView(ListView):
         companies = data["historicalStockList"]
 
         if not HistoricalStockPrice.objects.all().exists():
-
             for company in companies:
                 for historical_data in company["historical"]:
                     historical_stock_data = HistoricalStockPrice(
@@ -53,26 +51,22 @@ class HistoricalStockListView(ListView):
 
         form = self.form_class(request.GET)
         search_query = form['search_query'].value()
+        min_vwap = form['min_vwap'].value()
+        max_vwap = form['max_vwap'].value()
 
         queryset = HistoricalStockPrice.objects.all()
 
         if search_query:
             queryset = queryset.filter(companySymbol__icontains=search_query)
 
-        sort_by = request.GET.get('sort', 'historicalVwap')  # Default sorting by companySymbol
-        queryset = queryset.order_by(sort_by)
+        if min_vwap:
+            queryset = queryset.filter(historicalVwap__gte=min_vwap)
 
-        # Paginate the queryset
-        page_obj = self.paginate_query(request, queryset, 100)
-
-        # all_historical_stock = HistoricalStockPrice.objects.all().order_by("id")
-        # page_obj = self.paginate_query(request, all_historical_stock, 100)
-        return render(request, self.template_name, {"page_obj": page_obj, "form": form})
-
-
-    def paginate_query(self, request, queryset, count):
-        paginator = Paginator(queryset, count)
+        if max_vwap:
+            queryset = queryset.filter(historicalVwap__lte=max_vwap)
+        
         page = request.GET.get("page")
+        paginator = Paginator(queryset, 100)
 
         try:
             page_obj = paginator.page(page)
@@ -80,8 +74,11 @@ class HistoricalStockListView(ListView):
             page_obj = paginator.page(1)
         except EmptyPage:
             page_obj = paginator.page(paginator.num_pages)
-      
-        return page_obj
+
+        # Preserve search parameters in pagination links
+        page_obj.query_params = f'&search_query={search_query}' if search_query else ''
+
+        return render(request, self.template_name, {"page_obj": page_obj, "form": form, "search_query": search_query})
     
 class StockChartView(TemplateView):
     template_name = "stock_charts.html"
