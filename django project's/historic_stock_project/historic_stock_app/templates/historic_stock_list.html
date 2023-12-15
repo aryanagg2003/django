@@ -6,25 +6,40 @@
 
 {% block content %}
     <div class="my-3 p-3 bg-white rounded shadow-sm">
+
+       
+
         <h1 class="display-4 text-center border-bottom border-gray pb-2 mb-0">Historical Stock Price</h1>
+
+        <form method="get" class="form-inline mb-3">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.search_query.label_tag }}
+                {{ form.search_query }}
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form> 
+
+        
+
         <button type="button" onclick="window.location.href='{% url 'stock_charts' %}'">Go to Charts</button>
         <table class="table table-responsive">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Company</th>
-                <th scope="col">Date</th>
-                <th scope="col">Open</th>
-                <th scope="col">High</th>
-                <th scope="col">Low</th>
-                <th scope="col">Close</th>
-                <th scope="col">Adj. Close</th>
-                <th scope="col">Volume</th>
-                <th scope="col">Unadjusted Volume</th>
-                <th scope="col">Change</th>
-                <th scope="col">Change Percentage</th>
-                <th scope="col">VWAP</th>
-                <th scope="col">Label</th>
-                <th scope="col">Change OverTime</th>
+                <th scope="col" href="?sort=companySymbol">Company</th>
+                <th scope="col" href="?sort=historicalDate">Date</th>
+                <th scope="col" href="?sort=historicalOpen">Open</th>
+                <th scope="col" href="?sort=historicalHigh">High</th>
+                <th scope="col" href="?sort=historicalLow">Low</th>
+                <th scope="col" href="?sort=historicalClose">Close</th>
+                <th scope="col" href="?sort=historicalAdjClose ">Adj. Close</th>
+                <th scope="col" href="?sort=historicalVolume">Volume</th>
+                <th scope="col" href="?sort=historicalUnAdjustedVolume">Unadjusted Volume</th>
+                <th scope="col" href="?sort=historicalChange">Change</th>
+                <th scope="col" href="?sort=historicalChangePercent">Change Percentage</th>
+                <th scope="col" href="?sort=historicalVwap">VWAP</th>
+                <th scope="col" href="?sort=historicalLabel">Label</th>
+                <th scope="col" href="?sort=historicalChangeOverTime">Change OverTime</th>
               </tr>
             </thead>
             <tbody>

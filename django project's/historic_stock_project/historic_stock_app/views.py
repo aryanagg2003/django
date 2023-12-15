@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from .models import HistoricalStockPrice
 import requests
-import json
+from .forms import StockSearchForm
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
@@ -17,16 +17,20 @@ from .models import HistoricalStockPrice
 class HistoricalStockListView(ListView):
 
     template_name = "historic_stock_list.html"
+    form_class = StockSearchForm
 
     def get(self, request, *args, **kwargs):
         url = "https://financialmodelingprep.com/api/v3/historical-price-full/AAPL,GOOG,AMZN?apikey="
-        api_key = "3WEkwtszQC3TEHEuUtnBU0MTnQm09xEs"
+        api_key = "5e009bd5d66003ac7dfdd6782a94a295"
         if not api_key:
             return HttpResponse("API key not found.")
+        
         response = requests.get(url + api_key)
         data = response.json()
         companies = data["historicalStockList"]
+
         if not HistoricalStockPrice.objects.all().exists():
+
             for company in companies:
                 for historical_data in company["historical"]:
                     historical_stock_data = HistoricalStockPrice(
@@ -47,15 +51,23 @@ class HistoricalStockListView(ListView):
                     )
                     historical_stock_data.save()
 
-        all_historical_stock = HistoricalStockPrice.objects.all().order_by("id")
-        page_obj = self.paginate_query(request, all_historical_stock, 100)
-        # Print the values in page_obj
-        # for historical_stock in page_obj:
-        #     print(f"Company: {historical_stock.companySymbol}, Date: {historical_stock.historicalDate}, ...")  # Add other fields as needed
-        
+        form = self.form_class(request.GET)
+        search_query = form['search_query'].value()
 
-         
-        return render(request, self.template_name, {"page_obj": page_obj})
+        queryset = HistoricalStockPrice.objects.all()
+
+        if search_query:
+            queryset = queryset.filter(companySymbol__icontains=search_query)
+
+        sort_by = request.GET.get('sort', 'historicalVwap')  # Default sorting by companySymbol
+        queryset = queryset.order_by(sort_by)
+
+        # Paginate the queryset
+        page_obj = self.paginate_query(request, queryset, 100)
+
+        # all_historical_stock = HistoricalStockPrice.objects.all().order_by("id")
+        # page_obj = self.paginate_query(request, all_historical_stock, 100)
+        return render(request, self.template_name, {"page_obj": page_obj, "form": form})
 
 
     def paginate_query(self, request, queryset, count):
@@ -77,51 +89,49 @@ class StockChartView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Replace 'YOUR_API_KEY' with your actual API key
-        api_key = "3WEkwtszQC3TEHEuUtnBU0MTnQm09xEs"
+        
+        api_key = "5e009bd5d66003ac7dfdd6782a94a295"
         url = f"https://financialmodelingprep.com/api/v3/historical-price-full/AAPL,GOOG,AMZN?apikey={api_key}"
 
-        # Make an API request to get stock data
+        
         response = requests.get(url)
         data = response.json()
 
-        # Extract relevant data for plotting
+        
         companies = data["historicalStockList"]
 
-        # Create a dictionary to store base64-encoded images for each company
+        
         company_images = {}
 
         for company in companies:
             dates = [entry["date"] for entry in company["historical"]]
             close_prices = [entry["close"] for entry in company["historical"]]
 
-            # Create a line chart using Matplotlib
+            
             plt.figure(figsize=(10, 6))
             plt.plot(dates, close_prices, label="Stock Prices", color="blue")
             plt.xlabel("Date")
             plt.ylabel("Closing Price")
             plt.title(f"{company['symbol']} Stock Prices Over Time")
-            plt.xticks(rotation=45)  # Rotate x-axis labels by 45 degrees for better readability
+            plt.xticks(rotation=45)  
             plt.legend()
 
-            # Convert the plot to a base64-encoded image
+            
             buffer = BytesIO()
             plt.savefig(buffer, format="png")
             buffer.seek(0)
             image_base64 = base64.b64encode(buffer.read()).decode("utf-8")
-            plt.close()  # Close the Matplotlib figure
+            plt.close()  
 
-            # Store the base64-encoded image in the dictionary
+            
             company_images[company['symbol']] = image_base64
 
-        # Pass the dictionary of base64-encoded images to the template
+        
         context["company_images"] = company_images
 
         return context
 
     def get(self, request, *args, **kwargs):
-        # Call the parent get method to set up the context data
+        
         context = self.get_context_data(**kwargs)
-
-        # Return the rendered template
         return self.render_to_response(context)
